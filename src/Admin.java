@@ -5,17 +5,16 @@ public class Admin extends Users {
         super(name, password);
     }
     public static Map<String, Users> storageDateAdmin = new HashMap();
+
+    public static Scanner scanner = new Scanner(System.in);
     public static void login(String name, String password) {
         storageDateAdmin.put("Admin", new Users(name, password));
     }
     public static void addAdmin() {
         Admin.login("Ruslan", "123");
-//        for (Map.Entry<String, Users> entry : Admin.storageDateAdmin.entrySet()) {
-//            System.out.println(entry.getKey() + " -> " + entry.getValue());
-//        }
     }
     public static void loginAdmin() {
-        Scanner scanner = new Scanner(System.in);
+
         while (true) {
             System.out.println("Веедите имя");
             String inputName = scanner.nextLine();
@@ -27,6 +26,42 @@ public class Admin extends Users {
                 System.out.println("Вы не администратор, доступ запрещен");
             }
             return;
+        }
+    }
+
+    public static void views() {
+        System.out.println("Добро пожаловать в админ панель!");
+        Map<String, UsersBuy> infoBuyUsers = new HashMap<>();
+        while (true) {
+            String[] action = {
+                    "1. Посмотреть кто купил на самую большую сумму",
+                    "2. Добавить покупателя, покупку и сумму покупки в базу",
+                    "3. Удалить покупателя из базы",
+                    "4. Закрыть программу"
+            };
+            for (String actions : action) {
+                System.out.println(actions);
+            }
+
+            System.out.println("Вывберите действие");
+            String inputAction = scanner.nextLine();
+
+            switch (inputAction) {
+                case "1":
+                    String addInfoUsersName = scanner.nextLine();
+                    String addInfoUsersProduct = scanner.nextLine();
+                    String addInfoUsersProductPrice = scanner.nextLine();
+                    infoBuyUsers.put("UsersInfo", new UsersBuy(addInfoUsersName, addInfoUsersProduct, Integer.parseInt(addInfoUsersProductPrice)));
+                    for (Map.Entry<String, UsersBuy> e  :  infoBuyUsers.entrySet()) {
+                        System.out.println(e.getKey() + " " + e.getValue());
+                    }
+                    break;
+                case "2":
+                    System.out.println("2");
+                default:
+                    System.out.println("no");
+                break;
+            }
         }
     }
 }
