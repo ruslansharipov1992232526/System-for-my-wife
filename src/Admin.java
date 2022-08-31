@@ -31,7 +31,7 @@ public class Admin extends Users {
 
     public static void views() {
         System.out.println("Добро пожаловать в админ панель!");
-        Map<String, UsersBuy> infoBuyUsers = new HashMap<>();
+        Map<String, UsersBuy> infoBuyUsers = new HashMap();
         while (true) {
             String[] action = {
                     "1. Посмотреть кто купил на самую большую сумму",
@@ -45,15 +45,25 @@ public class Admin extends Users {
 
             System.out.println("Вывберите действие");
             String inputAction = scanner.nextLine();
-
+            Random random = new Random();
             switch (inputAction) {
                 case "1":
+                    System.out.println("Введите имя покупателя");
                     String addInfoUsersName = scanner.nextLine();
+
+                    System.out.println("Введите номер телефона покупателя");
+                    String addInfoUsersPhone = scanner.nextLine();
+
+                    System.out.println("Введите покупаемый продукт");
                     String addInfoUsersProduct = scanner.nextLine();
+
+                    System.out.println("Сумма продукта");
                     String addInfoUsersProductPrice = scanner.nextLine();
-                    infoBuyUsers.put("UsersInfo", new UsersBuy(addInfoUsersName, addInfoUsersProduct, Integer.parseInt(addInfoUsersProductPrice)));
-                    for (Map.Entry<String, UsersBuy> e  :  infoBuyUsers.entrySet()) {
-                        System.out.println(e.getKey() + " " + e.getValue());
+                    int RAND = random.nextInt(1000000);
+                    infoBuyUsers.put(String.valueOf(RAND), new UsersBuy(addInfoUsersName, addInfoUsersPhone, addInfoUsersProduct, addInfoUsersProductPrice));
+
+                    for (Map.Entry<String, UsersBuy> en : infoBuyUsers.entrySet()) {
+                        System.out.println(en.getKey() + " -> " + en.getValue());
                     }
                     break;
                 case "2":
